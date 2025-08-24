@@ -1,25 +1,21 @@
 ﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 class Program
 {
     static void Main()
     {
         // 1. Generar 500 ciudadanos ficticios
-        HashSet<string> todos = new HashSet<string>();
+        System.Collections.Generic.HashSet<string> todos = new System.Collections.Generic.HashSet<string>();
         for (int i = 1; i <= 500; i++)
         {
             todos.Add("Ciudadano " + i);
         }
 
         // 2. Crear vacunados con Pfizer y AstraZeneca (75 cada uno)
-        Random rnd = new Random();
-        List<string> listaTodos = todos.ToList();
+        System.Random rnd = new System.Random();
+        System.Collections.Generic.List<string> listaTodos = new System.Collections.Generic.List<string>(todos);
 
-        HashSet<string> pfizer = new HashSet<string>();
-        HashSet<string> astrazeneca = new HashSet<string>();
+        System.Collections.Generic.HashSet<string> pfizer = new System.Collections.Generic.HashSet<string>();
+        System.Collections.Generic.HashSet<string> astrazeneca = new System.Collections.Generic.HashSet<string>();
 
         while (pfizer.Count < 75)
             pfizer.Add(listaTodos[rnd.Next(listaTodos.Count)]);
@@ -28,23 +24,23 @@ class Program
             astrazeneca.Add(listaTodos[rnd.Next(listaTodos.Count)]);
 
         // 3. Operaciones de conjuntos
-        HashSet<string> noVacunados = new HashSet<string>(todos);
+        System.Collections.Generic.HashSet<string> noVacunados = new System.Collections.Generic.HashSet<string>(todos);
         noVacunados.ExceptWith(pfizer);
         noVacunados.ExceptWith(astrazeneca);
 
-        HashSet<string> dobleDosis = new HashSet<string>(pfizer);
+        System.Collections.Generic.HashSet<string> dobleDosis = new System.Collections.Generic.HashSet<string>(pfizer);
         dobleDosis.IntersectWith(astrazeneca);
 
-        HashSet<string> soloPfizer = new HashSet<string>(pfizer);
+        System.Collections.Generic.HashSet<string> soloPfizer = new System.Collections.Generic.HashSet<string>(pfizer);
         soloPfizer.ExceptWith(astrazeneca);
 
-        HashSet<string> soloAstrazeneca = new HashSet<string>(astrazeneca);
+        System.Collections.Generic.HashSet<string> soloAstrazeneca = new System.Collections.Generic.HashSet<string>(astrazeneca);
         soloAstrazeneca.ExceptWith(pfizer);
 
-        // 4. Mostrar resultados
-        Console.WriteLine("Ciudadanos que NO se han vacunado: " + noVacunados.Count);
-        Console.WriteLine("Ciudadanos con ambas dosis: " + dobleDosis.Count);
-        Console.WriteLine("Ciudadanos SOLO con Pfizer: " + soloPfizer.Count);
-        Console.WriteLine("Ciudadanos SOLO con AstraZeneca: " + soloAstrazeneca.Count);
+        // 4. Mostrar resultados en consola
+        System.Console.WriteLine("Ciudadanos que NO se han vacunado: " + noVacunados.Count);
+        System.Console.WriteLine("Ciudadanos con ambas dosis: " + dobleDosis.Count);
+        System.Console.WriteLine("Ciudadanos SOLO con Pfizer: " + soloPfizer.Count);
+        System.Console.WriteLine("Ciudadanos SOLO con AstraZeneca: " + soloAstrazeneca.Count);
     }
 }
